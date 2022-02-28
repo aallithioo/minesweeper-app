@@ -1,0 +1,8 @@
+CREATOR      : THIO ALLI
+
+APP NAME     : 
+RELEASE DATE : 
+VERSION      : 
+
+TECHNOlOGIES : - Dart
+               - Flutter

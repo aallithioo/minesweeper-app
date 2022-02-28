@@ -1,0 +1,12 @@
+// USAGE
+
+Color                   : SetColor
+Size                    : SetSize
+Text Align              : SetTextAlign
+Font Style              : SetFontStyle
+Font Weight             : SetFontWeight
+Typeface                : SetTypeface
+Text Decoration Style   : SetTextDecorationStyle
+border                  : SetBorder
+margin                  : SetMargin
+padding                 : SetPadding
