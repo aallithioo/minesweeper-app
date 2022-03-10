@@ -8,6 +8,9 @@ class MobileHomeContent extends StatefulWidget {
 }
 
 class _MobileHomeContentState extends State<MobileHomeContent> {
+  int numberOfSquares = 10 * 10;
+  int numberInEachRow = 10;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -86,10 +89,10 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
             padding: SetPadding.all['sm'],
             child: GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 10,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: numberInEachRow,
               ),
-              itemCount: 100,
+              itemCount: numberOfSquares,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: SetPadding.all['xs'] / 4.0,
