@@ -13,32 +13,13 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   List squareStatus = []; // number of bombs around, revealed = true ?? false
 
   // bomb location
-  int minBombLocation = 0;
+  int minBombLocation = 50;
   int maxBombLocation = 150;
-  int? totalBomb;
+  List<int> first = [1, 3, 5, 7, 9, 11, 13, 15];
+  List<int> last = [2, 4, 6, 8, 10, 12, 14, 0];
   Random random = Random();
   List<int> bombLocation = [];
-
-  // var bombLocation =
-  //     new List<int>.generate(10, (int index) => index); // [0, 1, 4]
-  // int randomBombLocation() {
-  //   int bombLocation = random.nextInt(numberOfSquares);
-  //   if (bombLocation >= minBombLocation && bombLocation <= maxBombLocation) {
-  //     return randomBombLocation();
-  //   }
-  //   return bombLocation;
-  // }
-
-  // final List<int> bombLocation = [
-  //   80,
-  //   12,
-  //   4,
-  //   100,
-  //   141,
-  //   66,
-  //   96,
-  //   127,
-  // ];
+  int won = 0;
 
   // bomb revealed
   bool bombRevealed = false;
@@ -48,10 +29,9 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
     super.initState();
 
     while (bombLocation.length <
-        ((random.nextInt(maxBombLocation) + 1) *
-                (random.nextInt(maxBombLocation) + 2)) /
-            numberInEachRow) {
-      bombLocation.add(Random().nextInt(maxBombLocation) + 0);
+        random.nextInt(maxBombLocation - minBombLocation + 1)) {
+      bombLocation
+          .add(Random().nextInt(maxBombLocation) + minBombLocation ~/ 2);
     }
 
     // initialy, each square has 0 bomb around, and is not revealed
@@ -175,47 +155,16 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   void restartGame() {
     setState(() {
       bombRevealed = false;
-      for (int i = 0; i < numberOfSquares; i++) {
-        squareStatus[i][1] = false;
-      }
     });
-  }
 
-  void gameOver() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            "HIYA KALAH AJIG",
-            style: theme.textTheme.headline5,
-          ),
-          content: Text("MAKANYA JANGAN TOLOL"),
-          actionsPadding: SetPadding.all['xs'],
-          actions: <Widget>[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: SetColor.tertiary.withOpacity(0.7),
-                shape: RoundedRectangleBorder(
-                  borderRadius: SetBorder.all['xs'] / 2.0,
-                ),
-              ),
-              child: Padding(
-                padding: SetPadding.all['xs'],
-                child: Text(
-                  "Play Again",
-                  style: theme.textTheme.button,
-                ),
-              ),
-              onPressed: () {
-                restartGame();
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        );
-      },
-    );
+    for (int i = 0; i < numberOfSquares; i++) {
+      squareStatus[i][1] = false;
+    }
+
+    while (bombLocation.length < random.nextInt(maxBombLocation)) {
+      bombLocation
+          .add(Random().nextInt(maxBombLocation) + minBombLocation ~/ 2);
+    }
   }
 
   void scanBombs() {
@@ -278,6 +227,98 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
     }
   }
 
+  void gameOver() {
+    setState(() {
+      bombRevealed = true;
+    });
+
+    for (int i = 0; i < numberOfSquares; i++) {
+      if (bombLocation.contains(i)) {
+        squareStatus[i][1] = true;
+      }
+    }
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              "Game Over",
+              style: theme.textTheme.headline5,
+            ),
+            content: Text(
+              "Don't give up, try again!",
+              style: theme.textTheme.bodyText2,
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: SetColor.tertiary,
+                  textStyle: theme.textTheme.button!.copyWith(
+                    color: SetColor.white,
+                  ),
+                ),
+                child: const Text("Play Again"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  restartGame();
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  void winTheGame() {
+    setState(() {
+      bombRevealed = true;
+      won++;
+    });
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              "Game Over",
+              style: theme.textTheme.headline5,
+            ),
+            content: Text(
+              "Don't give up, try again!",
+              style: theme.textTheme.bodyText2,
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: SetColor.tertiary,
+                  textStyle: theme.textTheme.button!.copyWith(
+                    color: SetColor.white,
+                  ),
+                ),
+                child: const Text("Play Again"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  restartGame();
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  void checkWinner() {
+    int unrevealedBoxes = 0;
+    for (int i = 0; i < numberOfSquares; i++) {
+      if (squareStatus[i][1] == false) {
+        unrevealedBoxes++;
+      }
+    }
+
+    if (unrevealedBoxes == numberOfSquares) {
+      winTheGame();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -289,13 +330,12 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
           height: MediaQuery.of(context).size.height * 0.2,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-            color: SetColor.tertiary.withOpacity(0.7),
+            color: SetColor.tertiary,
           ),
           child: Row(
             mainAxisAlignment: SetMainAxisAlign.spaceEvenly,
             crossAxisAlignment: SetCrossAxisAlign.center,
             children: [
-              // TODO : add total bomb
               Column(
                 mainAxisAlignment: SetMainAxisAlign.center,
                 children: [
@@ -316,21 +356,22 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                   ),
                 ],
               ),
-              // TODO : add restart game
               IconButton(
                 icon: Icon(
                   Icons.refresh_outlined,
                   size: SetSize.md,
                   color: SetColor.primary,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  restartGame();
+                },
               ),
               // TODO : add total win game
               Column(
                 mainAxisAlignment: SetMainAxisAlign.center,
                 children: [
                   Text(
-                    '00',
+                    won.toString(),
                     style: theme.textTheme.headline5!.copyWith(
                       color: SetColor.primary,
                       fontSize: SetFontSize.lg / 1.5,
@@ -338,7 +379,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                     ),
                   ),
                   Text(
-                    'Win'.toUpperCase(),
+                    'Won'.toUpperCase(),
                     style: theme.textTheme.bodyText1!.copyWith(
                       color: SetColor.secondary,
                       letterSpacing: SetLetterSpacing.positive * 2.0,
@@ -365,9 +406,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                     revealed: bombRevealed,
                     function: () {
                       // user tapped the bomb
-                      setState(() {
-                        bombRevealed = true;
-                      });
                       gameOver();
                     },
                   );
@@ -378,6 +416,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                     function: () {
                       // reveal the square
                       revealedSquares(index);
+                      checkWinner();
                     },
                   );
                 }
