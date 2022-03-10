@@ -97,7 +97,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
           ),
         ),
 
-        // TODO : add grid
         Expanded(
           child: Padding(
             padding: SetPadding.all['sm'],
@@ -116,7 +115,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
           ),
         ),
 
-        // TODO : add brand
         Padding(
           padding: SetPadding.bottom['sm'],
           child: Text(

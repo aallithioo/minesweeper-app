@@ -14,6 +14,7 @@ import '../../../../app/widget/padding.dart';
 part './widget/mobile_home_body.dart';
 part './widget/mobile_home_content.dart';
 part './widget/boxes.dart';
+part './widget/bombs.dart';
 
 class MobileHomeScreen extends StatelessWidget {
   const MobileHomeScreen({Key? key}) : super(key: key);
