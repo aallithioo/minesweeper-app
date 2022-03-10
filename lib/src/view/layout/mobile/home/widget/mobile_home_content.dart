@@ -38,9 +38,57 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
       int numberOfBombsAround = 0;
 
       // check if there is a bomb around on the left
-      if (bombLocation.contains(i - 1)) {
+      if (bombLocation.contains(i - 1) && i % numberInEachRow != 0) {
         numberOfBombsAround++;
       }
+
+      // check if there is a bomb around on the right
+      if (bombLocation.contains(i + 1) &&
+          i % numberInEachRow != numberInEachRow - 1) {
+        numberOfBombsAround++;
+      }
+
+      // check if there is a bomb around on the top
+      if (bombLocation.contains(i - numberInEachRow) && i >= numberInEachRow) {
+        numberOfBombsAround++;
+      }
+
+      // check if there is a bomb around on the bottom
+      if (bombLocation.contains(i + numberInEachRow) &&
+          i < numberOfSquares - numberInEachRow) {
+        numberOfBombsAround++;
+      }
+
+      // check if there is a bomb around on the top left
+      if (bombLocation.contains(i - numberInEachRow - 1) &&
+          i >= numberInEachRow &&
+          i % numberInEachRow != 0) {
+        numberOfBombsAround++;
+      }
+
+      // check if there is a bomb around on the top right
+      if (bombLocation.contains(i - numberInEachRow + 1) &&
+          i >= numberInEachRow &&
+          i % numberInEachRow != numberInEachRow - 1) {
+        numberOfBombsAround++;
+      }
+
+      // check if there is a bomb around on the bottom left
+      if (bombLocation.contains(i + numberInEachRow - 1) &&
+          i < numberOfSquares - numberInEachRow &&
+          i % numberInEachRow != 0) {
+        numberOfBombsAround++;
+      }
+
+      // check if there is a bomb around on the bottom right
+      if (bombLocation.contains(i + numberInEachRow + 1) &&
+          i < numberOfSquares - numberInEachRow &&
+          i % numberInEachRow != numberInEachRow - 1) {
+        numberOfBombsAround++;
+      }
+
+      // set the number of bombs around
+      squareStatus[i][0] = numberOfBombsAround;
     }
   }
 
@@ -128,7 +176,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
               itemBuilder: (BuildContext context, int index) {
                 if (bombLocation.contains(index)) {
                   return MobileHomeBombs(
-                    child: index,
                     revealed: squareStatus[index][1]!,
                     function: () {
                       // user tapped the bomb
@@ -136,7 +183,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                   );
                 } else {
                   return MobileHomeBoxes(
-                    child: index,
+                    child: squareStatus[index][0],
                     revealed: squareStatus[index][1]!,
                     function: () {
                       // reveal the square
