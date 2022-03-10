@@ -14,10 +14,14 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
 
   // bomb location
   int minBombLocation = 0;
-  int maxBombLocation = 0;
+  int maxBombLocation = 150;
   Random random = Random();
 
   // TODO : add random bomb location
+  List<int> bombLocation = [];
+
+  // var bombLocation =
+  //     new List<int>.generate(10, (int index) => index); // [0, 1, 4]
   // int randomBombLocation() {
   //   int bombLocation = random.nextInt(numberOfSquares);
   //   if (bombLocation >= minBombLocation && bombLocation <= maxBombLocation) {
@@ -26,16 +30,16 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   //   return bombLocation;
   // }
 
-  final List<int> bombLocation = [
-    80,
-    12,
-    4,
-    100,
-    141,
-    66,
-    96,
-    127,
-  ];
+  // final List<int> bombLocation = [
+  //   80,
+  //   12,
+  //   4,
+  //   100,
+  //   141,
+  //   66,
+  //   96,
+  //   127,
+  // ];
 
   // bomb revealed
   bool bombRevealed = false;
@@ -43,6 +47,13 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   @override
   void initState() {
     super.initState();
+
+    while (bombLocation.length <
+        ((random.nextInt(maxBombLocation) + 1) *
+                (random.nextInt(maxBombLocation) + 2)) /
+            numberInEachRow) {
+      bombLocation.add(Random().nextInt(maxBombLocation) + 0);
+    }
 
     // initialy, each square has 0 bomb around, and is not revealed
     for (int i = 0; i < numberOfSquares; i++) {
@@ -244,7 +255,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                 mainAxisAlignment: SetMainAxisAlign.center,
                 children: [
                   Text(
-                    '06',
+                    bombLocation.length.toString(),
                     style: theme.textTheme.headline5!.copyWith(
                       color: SetColor.primary,
                       fontSize: SetFontSize.lg / 1.5,

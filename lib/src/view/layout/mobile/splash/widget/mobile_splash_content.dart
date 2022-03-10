@@ -9,18 +9,21 @@ class MobileSplashContent extends StatefulWidget {
 
 class _MobileSplashContentState extends State<MobileSplashContent> {
   double _width = 0;
+  double _newWidth = SetSize.xl;
 
   @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 50), () {
       setState(() {
-        double _newWidth = SetSize.xl;
         _width = _newWidth;
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          Navigator.pushReplacementNamed(
+            context,
+            Routes.mobile['home'],
+          );
+        });
       });
-    });
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      Navigator.pushReplacementNamed(context, Routes.mobile['home']);
     });
   }
 
