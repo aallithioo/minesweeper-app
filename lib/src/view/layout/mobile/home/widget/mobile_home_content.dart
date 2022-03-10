@@ -28,16 +28,19 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   void initState() {
     super.initState();
 
-    while (bombLocation.length <
-        random.nextInt(maxBombLocation - minBombLocation + 1)) {
-      bombLocation
-          .add(Random().nextInt(maxBombLocation) + minBombLocation ~/ 2);
-    }
+    setState(() {
+      bombLocation.clear();
+    });
 
     // initialy, each square has 0 bomb around, and is not revealed
     for (int i = 0; i < numberOfSquares; i++) {
       squareStatus.add([0, false]);
     }
+
+    while (bombLocation.length < random.nextInt(maxBombLocation)) {
+      bombLocation.add(random.nextInt(maxBombLocation));
+    }
+
     scanBombs();
   }
 
@@ -155,6 +158,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   void restartGame() {
     setState(() {
       bombRevealed = false;
+      bombLocation.clear();
     });
 
     for (int i = 0; i < numberOfSquares; i++) {
@@ -162,8 +166,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
     }
 
     while (bombLocation.length < random.nextInt(maxBombLocation)) {
-      bombLocation
-          .add(Random().nextInt(maxBombLocation) + minBombLocation ~/ 2);
+      bombLocation.add(Random().nextInt(maxBombLocation));
     }
   }
 
@@ -280,11 +283,11 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              "Game Over",
+              "Congratulations!",
               style: theme.textTheme.headline5,
             ),
             content: Text(
-              "Don't give up, try again!",
+              "Awesome! You completed the game!",
               style: theme.textTheme.bodyText2,
             ),
             actions: <Widget>[
@@ -314,7 +317,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
       }
     }
 
-    if (unrevealedBoxes == numberOfSquares) {
+    if (unrevealedBoxes == bombLocation.length) {
       winTheGame();
     }
   }
