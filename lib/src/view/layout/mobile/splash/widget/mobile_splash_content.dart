@@ -19,7 +19,7 @@ class _MobileSplashContentState extends State<MobileSplashContent> {
         _width = _newWidth;
       });
     });
-    Future.delayed(const Duration(milliseconds: 1500), () {
+    Future.delayed(const Duration(milliseconds: 1000), () {
       Navigator.pushReplacementNamed(context, Routes.mobile['home']);
     });
   }

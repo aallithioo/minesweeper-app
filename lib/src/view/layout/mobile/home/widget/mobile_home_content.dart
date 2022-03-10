@@ -10,10 +10,10 @@ class MobileHomeContent extends StatefulWidget {
 class _MobileHomeContentState extends State<MobileHomeContent> {
   int numberOfSquares = 10 * 15;
   int numberInEachRow = 10;
-  var squareStatus = []; // number of bombs around, revealed = true ?? false
+  List squareStatus = []; // number of bombs around, revealed = true ?? false
 
   // bomb location
-  final List<int> bombLocation = [];
+  final List<int> bombLocation = [80, 12, 4, 100, 141, 66, 96, 127];
 
   @override
   void initState() {
@@ -21,7 +21,26 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
 
     // initialy, each square has 0 bomb around, and is not revealed
     for (int i = 0; i < numberOfSquares; i++) {
-      squareStatus.add(false);
+      squareStatus.add([0, false]);
+    }
+    scanBombs();
+  }
+
+  void revealedSquares(int index) {
+    setState(() {
+      squareStatus[index][1] = true;
+    });
+  }
+
+  void scanBombs() {
+    for (int i = 0; i < numberOfSquares; i++) {
+      // there is no bombs around iniitialy
+      int numberOfBombsAround = 0;
+
+      // check if there is a bomb around on the left
+      if (bombLocation.contains(i - 1)) {
+        numberOfBombsAround++;
+      }
     }
   }
 
@@ -107,9 +126,24 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
               ),
               itemCount: numberOfSquares,
               itemBuilder: (BuildContext context, int index) {
-                return MobileHomeBoxes(
-                  child: index,
-                );
+                if (bombLocation.contains(index)) {
+                  return MobileHomeBombs(
+                    child: index,
+                    revealed: squareStatus[index][1]!,
+                    function: () {
+                      // user tapped the bomb
+                    },
+                  );
+                } else {
+                  return MobileHomeBoxes(
+                    child: index,
+                    revealed: squareStatus[index][1]!,
+                    function: () {
+                      // reveal the square
+                      revealedSquares(index);
+                    },
+                  );
+                }
               },
             ),
           ),
