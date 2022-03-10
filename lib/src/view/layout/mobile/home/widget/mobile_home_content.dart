@@ -15,6 +15,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   // bomb location
   int minBombLocation = 0;
   int maxBombLocation = 150;
+  int? totalBomb;
   Random random = Random();
   List<int> bombLocation = [];
 
@@ -171,6 +172,52 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
     }
   }
 
+  void restartGame() {
+    setState(() {
+      bombRevealed = false;
+      for (int i = 0; i < numberOfSquares; i++) {
+        squareStatus[i][1] = false;
+      }
+    });
+  }
+
+  void gameOver() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            "HIYA KALAH AJIG",
+            style: theme.textTheme.headline5,
+          ),
+          content: Text("MAKANYA JANGAN TOLOL"),
+          actionsPadding: SetPadding.all['xs'],
+          actions: <Widget>[
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: SetColor.tertiary.withOpacity(0.7),
+                shape: RoundedRectangleBorder(
+                  borderRadius: SetBorder.all['xs'] / 2.0,
+                ),
+              ),
+              child: Padding(
+                padding: SetPadding.all['xs'],
+                child: Text(
+                  "Play Again",
+                  style: theme.textTheme.button,
+                ),
+              ),
+              onPressed: () {
+                restartGame();
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
   void scanBombs() {
     for (int i = 0; i < numberOfSquares; i++) {
       // there is no bombs around iniitialy
@@ -321,6 +368,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                       setState(() {
                         bombRevealed = true;
                       });
+                      gameOver();
                     },
                   );
                 } else {
