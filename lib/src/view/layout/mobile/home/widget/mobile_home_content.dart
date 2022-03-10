@@ -15,8 +15,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   // bomb location
   int minBombLocation = 50;
   int maxBombLocation = 150;
-  List<int> first = [1, 3, 5, 7, 9, 11, 13, 15];
-  List<int> last = [2, 4, 6, 8, 10, 12, 14, 0];
   Random random = Random();
   List<int> bombLocation = [];
   int won = 0;
