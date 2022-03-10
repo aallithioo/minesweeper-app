@@ -28,7 +28,7 @@ class _MobileSplashContentState extends State<MobileSplashContent> {
       crossAxisAlignment: SetCrossAxisAlign.center,
       children: [
         Text(
-          'type-here',
+          'minesweeper',
           style: theme.textTheme.headline5,
         ),
         SetSizeBox.vertical['xs'],
