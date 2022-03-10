@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:minesweeper/src/app/theme/color.dart';
+import 'package:minesweeper/src/app/theme/font_weight.dart';
+import 'package:minesweeper/src/app/widget/border.dart';
+import 'package:minesweeper/src/app/widget/cross_axis_alignment.dart';
+import 'package:minesweeper/src/app/widget/main_axis_alignment.dart';
 
 import '../../../../app/theme/theme.dart';
 
