@@ -25,13 +25,15 @@ class _MobileSplashContentState extends State<MobileSplashContent> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: SetMainAxisAlign.center,
-      crossAxisAlignment: SetCrossAxisAlign.center,
+      crossAxisAlignment: SetCrossAxisAlign.start,
       children: [
         Text(
-          'minesweeper',
-          style: theme.textTheme.headline5,
+          'mine\nsweeper',
+          style: theme.textTheme.headline5!.copyWith(
+            height: 1,
+          ),
         ),
-        SetSizeBox.vertical['xs'],
+        SetSizeBox.vertical['sm'],
         Stack(
           children: [
             Container(
