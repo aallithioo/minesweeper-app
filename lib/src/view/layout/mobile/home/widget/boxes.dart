@@ -27,7 +27,7 @@ class MobileHomeBoxes extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              child.toString(),
+              revealed ? child.toString() : '',
               style: theme.textTheme.bodyText2,
             ),
           ),
