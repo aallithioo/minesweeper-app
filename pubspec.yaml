@@ -1,5 +1,5 @@
-name: type_app_name_here
-description: type_description_here.
+name: minesweeper 
+description: minesweeper.
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
