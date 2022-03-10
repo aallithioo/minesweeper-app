@@ -37,6 +37,9 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
     127,
   ];
 
+  // bomb revealed
+  bool bombRevealed = false;
+
   @override
   void initState() {
     super.initState();
@@ -49,9 +52,114 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   }
 
   void revealedSquares(int index) {
-    setState(() {
-      squareStatus[index][1] = true;
-    });
+    // reveal current box if it is a number >= 1
+    if (squareStatus[index][0] != 0) {
+      setState(() {
+        squareStatus[index][1] = true;
+      });
+    }
+
+    // if current box is == 0
+    else if (squareStatus[index][0] == 0) {
+      // reveal the current box and all the boxes around it
+      setState(() {
+        squareStatus[index][1] = true;
+
+        // reveal the boxes around the current box, unless it is a wall
+        if (index % numberInEachRow != 0) {
+          // if next box is not revealed yet and it is a 0, then recurse
+          if (squareStatus[index - 1][0] == 0 &&
+              squareStatus[index - 1][1] == false) {
+            revealedSquares(index - 1);
+          }
+
+          squareStatus[index - 1][1] = true;
+        }
+
+        // reveal the top box
+        if (index >= numberInEachRow) {
+          if (squareStatus[index - numberInEachRow][0] == 0 &&
+              squareStatus[index - numberInEachRow][1] == false) {
+            revealedSquares(index - numberInEachRow);
+          }
+
+          squareStatus[index - numberInEachRow][1] = true;
+        }
+
+        // reveal the top right box
+        if (index >= numberInEachRow &&
+            index % numberInEachRow != numberInEachRow - 1) {
+          if (squareStatus[index - numberInEachRow + 1][0] == 0 &&
+              squareStatus[index - numberInEachRow + 1][1] == false) {
+            revealedSquares(index - numberInEachRow + 1);
+          }
+
+          squareStatus[index - numberInEachRow + 1][1] = true;
+        }
+
+        // reveal the right box
+        if (index % numberInEachRow != numberInEachRow - 1) {
+          if (squareStatus[index + 1][0] == 0 &&
+              squareStatus[index + 1][1] == false) {
+            revealedSquares(index + 1);
+          }
+
+          squareStatus[index + 1][1] = true;
+        }
+
+        // reveal the bottom right box
+        if (index < numberOfSquares - numberInEachRow &&
+            index % numberInEachRow != numberInEachRow - 1) {
+          if (squareStatus[index + numberInEachRow + 1][0] == 0 &&
+              squareStatus[index + numberInEachRow + 1][1] == false) {
+            revealedSquares(index + numberInEachRow + 1);
+          }
+
+          squareStatus[index + numberInEachRow + 1][1] = true;
+        }
+
+        // reveal the bottom box
+        if (index < numberOfSquares - numberInEachRow) {
+          if (squareStatus[index + numberInEachRow][0] == 0 &&
+              squareStatus[index + numberInEachRow][1] == false) {
+            revealedSquares(index + numberInEachRow);
+          }
+
+          squareStatus[index + numberInEachRow][1] = true;
+        }
+
+        // reveal the bottom left box
+        if (index < numberOfSquares - numberInEachRow &&
+            index % numberInEachRow != 0) {
+          if (squareStatus[index + numberInEachRow - 1][0] == 0 &&
+              squareStatus[index + numberInEachRow - 1][1] == false) {
+            revealedSquares(index + numberInEachRow - 1);
+          }
+
+          squareStatus[index + numberInEachRow - 1][1] = true;
+        }
+
+        // reveal the left box
+        if (index % numberInEachRow != 0) {
+          if (squareStatus[index - 1][0] == 0 &&
+              squareStatus[index - 1][1] == false) {
+            revealedSquares(index - 1);
+          }
+
+          squareStatus[index - 1][1] = true;
+        }
+
+        // reveal the top left box
+        if (index >= numberInEachRow && index % numberInEachRow != 0) {
+          if (squareStatus[index - numberInEachRow - 1][0] == 0 &&
+              squareStatus[index - numberInEachRow - 1][1] == false) {
+            revealedSquares(index - numberInEachRow - 1);
+          }
+
+          squareStatus[index - numberInEachRow - 1][1] = true;
+        }
+      });
+    }
   }
 
   void scanBombs() {
@@ -198,9 +306,12 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
               itemBuilder: (BuildContext context, int index) {
                 if (bombLocation.contains(index)) {
                   return MobileHomeBombs(
-                    revealed: squareStatus[index][1]!,
+                    revealed: bombRevealed,
                     function: () {
                       // user tapped the bomb
+                      setState(() {
+                        bombRevealed = true;
+                      });
                     },
                   );
                 } else {

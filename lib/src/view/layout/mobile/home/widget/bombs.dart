@@ -19,7 +19,7 @@ class MobileHomeBombs extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: revealed
-                ? SetColor.black.withOpacity(0.4)
+                ? SetColor.light['red'].withOpacity(0.7)
                 : SetColor.black.withOpacity(0.2),
             borderRadius: SetBorder.all['xs'] / 3.0,
           ),
