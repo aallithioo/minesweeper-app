@@ -26,16 +26,16 @@ class SetColor {
   };
 
   // grey color
-  static Map grey = {
-    "50": Colors.grey[50],
-    "100": Colors.grey[100],
-    "200": Colors.grey[200],
-    "300": Colors.grey[300],
-    "400": Colors.grey[400],
-    "500": Colors.grey[500],
-    "600": Colors.grey[600],
-    "700": Colors.grey[700],
-    "800": Colors.grey[800],
-    "900": Colors.grey[900],
-  };
+  // static Map grey = {
+  //   "50": Colors.grey[50],
+  //   "100": Colors.grey[100],
+  //   "200": Colors.grey[200],
+  //   "300": Colors.grey[300],
+  //   "400": Colors.grey[400],
+  //   "500": Colors.grey[500],
+  //   "600": Colors.grey[600],
+  //   "700": Colors.grey[700],
+  //   "800": Colors.grey[800],
+  //   "900": Colors.grey[900],
+  // };
 }
