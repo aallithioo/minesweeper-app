@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'app/themes/theme.dart';
-import 'view/splash/splash_screen.dart';
+import 'app/routes/route.dart';
+import 'app/theme/theme.dart';
+import 'view/layout/mobile/splash/mobile_splash_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Implement state management
+    // TODO : implement state management
     return MaterialApp(
-      // TODO: Add theme data
-      theme: kThioAlli,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const SplashScreeen(),
-      },
       debugShowCheckedModeBanner: false,
+      // TODO : change title
+      title: 'waktos',
+      theme: theme,
+      initialRoute: Routes.mobile['splash'],
+      routes: {
+        Routes.mobile['splash']: (context) => const MobileSplashScreen(),
+      },
     );
   }
 }
