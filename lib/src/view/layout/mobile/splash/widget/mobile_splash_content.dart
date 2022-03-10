@@ -18,10 +18,9 @@ class _MobileSplashContentState extends State<MobileSplashContent> {
         double _newWidth = SetSize.xl;
         _width = _newWidth;
       });
-      Navigator.pushReplacementNamed(
-        context,
-        Routes.mobile['home'],
-      );
+    });
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      Navigator.pushReplacementNamed(context, Routes.mobile['home']);
     });
   }
 
