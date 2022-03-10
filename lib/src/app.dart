@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // TODO : change title
-      title: 'waktos',
+      title: 'minesweeper',
       theme: theme,
       initialRoute: Routes.mobile['splash'],
       routes: {
