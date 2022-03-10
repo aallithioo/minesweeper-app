@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'app/routes/route.dart';
 import 'app/theme/theme.dart';
+import 'view/layout/mobile/home/mobile_home_screen.dart';
 import 'view/layout/mobile/splash/mobile_splash_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.mobile['splash'],
       routes: {
         Routes.mobile['splash']: (context) => const MobileSplashScreen(),
+        Routes.mobile['home']: (context) => const MobileHomeScreen(),
       },
     );
   }
