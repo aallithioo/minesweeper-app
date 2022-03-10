@@ -17,18 +17,20 @@ class MobileHomeBoxes extends StatelessWidget {
     return GestureDetector(
       onTap: function,
       child: Padding(
-        padding: SetPadding.all['xs'] / 4.0,
+        padding: SetPadding.all['xs'] / 6.0,
         child: Container(
           decoration: BoxDecoration(
             color: revealed
-                ? SetColor.tertiary.withOpacity(0.3)
-                : SetColor.tertiary.withOpacity(0.7),
-            borderRadius: SetBorder.all['xs'] / 2.0,
+                ? SetColor.black.withOpacity(0.4)
+                : SetColor.black.withOpacity(0.2),
+            borderRadius: SetBorder.all['xs'] / 3.0,
           ),
           child: Center(
             child: Text(
               revealed ? child.toString() : '',
-              style: theme.textTheme.bodyText2,
+              style: theme.textTheme.bodyText2!.copyWith(
+                color: revealed == 1 ? SetColor.white : SetColor.black,
+              ),
             ),
           ),
         ),

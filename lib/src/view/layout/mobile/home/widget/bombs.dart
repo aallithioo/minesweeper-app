@@ -15,18 +15,22 @@ class MobileHomeBombs extends StatelessWidget {
     return GestureDetector(
       onTap: function,
       child: Padding(
-        padding: SetPadding.all['xs'] / 4.0,
+        padding: SetPadding.all['xs'] / 6.0,
         child: Container(
           decoration: BoxDecoration(
-            color: SetColor.black.withOpacity(0.1),
-            borderRadius: SetBorder.all['xs'] / 2.0,
+            color: revealed
+                ? SetColor.black.withOpacity(0.4)
+                : SetColor.black.withOpacity(0.2),
+            borderRadius: SetBorder.all['xs'] / 3.0,
           ),
-          child: Center(
-            child: Text(
-              '💣',
-              style: theme.textTheme.bodyText2,
-            ),
-          ),
+          child: revealed
+              ? Center(
+                  child: Text(
+                    '💣',
+                    style: theme.textTheme.bodyText2,
+                  ),
+                )
+              : Container(),
         ),
       ),
     );
