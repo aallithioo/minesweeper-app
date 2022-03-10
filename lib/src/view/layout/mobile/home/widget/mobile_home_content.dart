@@ -13,7 +13,29 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   List squareStatus = []; // number of bombs around, revealed = true ?? false
 
   // bomb location
-  final List<int> bombLocation = [80, 12, 4, 100, 141, 66, 96, 127];
+  int minBombLocation = 0;
+  int maxBombLocation = 0;
+  Random random = Random();
+
+  // TODO : add random bomb location
+  // int randomBombLocation() {
+  //   int bombLocation = random.nextInt(numberOfSquares);
+  //   if (bombLocation >= minBombLocation && bombLocation <= maxBombLocation) {
+  //     return randomBombLocation();
+  //   }
+  //   return bombLocation;
+  // }
+
+  final List<int> bombLocation = [
+    80,
+    12,
+    4,
+    100,
+    141,
+    66,
+    96,
+    127,
+  ];
 
   @override
   void initState() {
