@@ -427,7 +427,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
         ),
 
         Padding(
-          padding: SetPadding.bottom['sm'],
+          padding: SetPadding.bottom['md'] / 1.5,
           child: Text(
             'Made with \u2665 by THIO ALLI',
             style: theme.textTheme.bodyText2!.copyWith(
