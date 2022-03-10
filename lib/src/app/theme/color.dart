@@ -16,12 +16,10 @@ class SetColor {
   static const Map light = {
     'white': Color.fromARGB(255, 255, 255, 255),
     'black': Color.fromARGB(255, 15, 16, 20),
-    'light-grey': Color(0xFFC5C5C5),
-    'dak-grey': Color.fromARGB(255, 112, 112, 112),
-    'blue': Color.fromARGB(255, 31, 110, 255),
-    'light-blue': Color.fromARGB(255, 106, 233, 255),
-    'green': Color.fromARGB(255, 46, 228, 79),
-    'yellow': Color.fromARGB(255, 255, 255, 43),
+    'grey': Color.fromARGB(255, 231, 231, 231),
+    'blue': Color.fromARGB(255, 98, 205, 255),
+    'green': Color.fromARGB(255, 100, 255, 128),
+    'yellow': Color.fromARGB(255, 255, 139, 30),
     'red': Color.fromARGB(255, 255, 46, 35),
   };
 

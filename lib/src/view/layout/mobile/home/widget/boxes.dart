@@ -18,22 +18,38 @@ class MobileHomeBoxes extends StatelessWidget {
       onTap: function,
       child: Padding(
         padding: SetPadding.all['xs'] / 6.0,
-        child: Container(
-          decoration: BoxDecoration(
-            color: revealed
-                ? SetColor.black.withOpacity(0.4)
-                : SetColor.black.withOpacity(0.2),
-            borderRadius: SetBorder.all['xs'] / 3.0,
-          ),
-          child: Center(
-            child: Text(
-              revealed ? child.toString() : '',
-              style: theme.textTheme.bodyText2!.copyWith(
-                color: revealed == 1 ? SetColor.white : SetColor.black,
+        child: revealed
+            ? Padding(
+                padding: SetPadding.all['xs'] / 2.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: revealed
+                        ? child == 1
+                            ? SetColor.light['blue']
+                            : child == 2
+                                ? SetColor.light['green']
+                                : child >= 3
+                                    ? SetColor.light['yellow']
+                                    : SetColor.light['grey']
+                        : SetColor.light['grey'].withOpacity(0.5),
+                    borderRadius: SetBorder.all['lg'],
+                  ),
+                  child: Center(
+                    child: Text(
+                      revealed && child >= 1 ? child.toString() : '',
+                      style: theme.textTheme.bodyText2!.copyWith(
+                        color: child == 1 ? SetColor.black : SetColor.black,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : Container(
+                decoration: BoxDecoration(
+                  color: SetColor.black.withOpacity(0.2),
+                  borderRadius: SetBorder.all['xs'] / 3.0,
+                ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }

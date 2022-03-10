@@ -16,8 +16,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
   int minBombLocation = 0;
   int maxBombLocation = 150;
   Random random = Random();
-
-  // TODO : add random bomb location
   List<int> bombLocation = [];
 
   // var bombLocation =
