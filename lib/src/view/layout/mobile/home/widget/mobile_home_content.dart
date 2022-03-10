@@ -8,8 +8,22 @@ class MobileHomeContent extends StatefulWidget {
 }
 
 class _MobileHomeContentState extends State<MobileHomeContent> {
-  int numberOfSquares = 10 * 10;
+  int numberOfSquares = 10 * 15;
   int numberInEachRow = 10;
+  var squareStatus = []; // number of bombs around, revealed = true ?? false
+
+  // bomb location
+  final List<int> bombLocation = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // initialy, each square has 0 bomb around, and is not revealed
+    for (int i = 0; i < numberOfSquares; i++) {
+      squareStatus.add(false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +51,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                     style: theme.textTheme.headline5!.copyWith(
                       color: SetColor.primary,
                       fontSize: SetFontSize.lg / 1.5,
-                      fontWeight: SetFontWeight.light,
+                      fontWeight: SetFontWeight.medium,
                     ),
                   ),
                   Text(
@@ -67,7 +81,7 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                     style: theme.textTheme.headline5!.copyWith(
                       color: SetColor.primary,
                       fontSize: SetFontSize.lg / 1.5,
-                      fontWeight: SetFontWeight.light,
+                      fontWeight: SetFontWeight.medium,
                     ),
                   ),
                   Text(
@@ -94,26 +108,21 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
               ),
               itemCount: numberOfSquares,
               itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: SetPadding.all['xs'] / 4.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: SetColor.tertiary.withOpacity(0.3),
-                      borderRadius: SetBorder.all['xs'] / 2.0,
-                    ),
-                  ),
-                );
+                return MobileHomeBoxes();
               },
             ),
           ),
         ),
 
         // TODO : add brand
-        Text(
-          'Made by THIO ALLI',
-          style: theme.textTheme.bodyText2!.copyWith(
-            fontSize: SetFontSize.sm / 1.5,
-            fontWeight: SetFontWeight.light,
+        Padding(
+          padding: SetPadding.bottom['sm'],
+          child: Text(
+            'Made with \u2665 by THIO ALLI',
+            style: theme.textTheme.bodyText2!.copyWith(
+              fontSize: SetFontSize.sm / 1.5,
+              fontWeight: SetFontWeight.light,
+            ),
           ),
         )
       ],
