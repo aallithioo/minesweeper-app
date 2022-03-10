@@ -108,7 +108,9 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
               ),
               itemCount: numberOfSquares,
               itemBuilder: (BuildContext context, int index) {
-                return MobileHomeBoxes();
+                return MobileHomeBoxes(
+                  child: index,
+                );
               },
             ),
           ),
