@@ -328,7 +328,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
       mainAxisAlignment: SetMainAxisAlign.spaceBetween,
       crossAxisAlignment: SetCrossAxisAlign.center,
       children: [
-        // TODO : add a game stat
         Container(
           height: MediaQuery.of(context).size.height * 0.2,
           width: MediaQuery.of(context).size.width,
@@ -369,7 +368,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
                   restartGame();
                 },
               ),
-              // TODO : add total win game
               Column(
                 mainAxisAlignment: SetMainAxisAlign.center,
                 children: [
@@ -393,7 +391,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
             ],
           ),
         ),
-
         Expanded(
           child: Padding(
             padding: SetPadding.all['sm'],
@@ -427,7 +424,6 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
             ),
           ),
         ),
-
         Padding(
           padding: SetPadding.bottom['md'] / 1.5,
           child: Text(
