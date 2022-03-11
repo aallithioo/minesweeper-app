@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
     // TODO : implement state management
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // TODO : change title
       title: 'minesweeper',
       theme: theme,
       initialRoute: Routes.mobile['splash'],

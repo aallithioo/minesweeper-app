@@ -166,6 +166,8 @@ class _MobileHomeContentState extends State<MobileHomeContent> {
     while (bombLocation.length < random.nextInt(maxBombLocation)) {
       bombLocation.add(Random().nextInt(maxBombLocation));
     }
+
+    scanBombs();
   }
 
   void scanBombs() {

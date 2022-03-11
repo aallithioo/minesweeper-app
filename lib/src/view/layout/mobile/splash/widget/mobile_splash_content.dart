@@ -9,7 +9,7 @@ class MobileSplashContent extends StatefulWidget {
 
 class _MobileSplashContentState extends State<MobileSplashContent> {
   double _width = 0;
-  double _newWidth = SetSize.xl;
+  final double _newWidth = SetSize.xl;
 
   @override
   void initState() {
